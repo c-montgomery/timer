@@ -2,9 +2,14 @@ import time
 from selenium.webdriver import Chrome
 import winsound
 from audioplayer import AudioPlayer
+import tkinter as tk
 
 
-isplaying = True
+root = tk.Tk()
+root.geometry('600x600')
+
+user_input = tk.Label()
+user_input.pack()
 # Requests number of minutes
 requested_units = int(input('Enter number of minutes\n'))*60
 start_time = time.time()
