@@ -1,30 +1,30 @@
 import time
-from selenium.webdriver import Chrome
-import winsound
 from audioplayer import AudioPlayer
-import tkinter as tk
+import keyboard
 
+class Egg_timer:
+    '''It's an egg timer'''
+    def __init__(self):
+        self.minutes = 1
+        self.elapsed_seconds = 0
 
-root = tk.Tk()
-root.geometry('600x600')
+    def start_timer(self):
+        seconds_set = int(self.minutes)*60
+        start_timer = time.time()
+        while int(self.elapsed_seconds) < int(seconds_set):
+            self.elapsed_seconds = round(time.time() - start_timer, 2)
+            print(round(self.elapsed_seconds, 2))
+        self.play_alarm()
 
-user_input = tk.Label()
-user_input.pack()
-# Requests number of minutes
-requested_units = int(input('Enter number of minutes\n'))*60
-start_time = time.time()
-elapsed_time = (time.time()-start_time)
-x = elapsed_time
+    def play_alarm(self):
+        sound_machine = AudioPlayer("C:/Users/craym/Desktop/alarm.wav")
+        while keyboard.is_pressed('space')==False:
+            sound_machine.play(loop=True, block=True)
+        sound_machine.stop()    
 
+    def set_timer(self):
+       self.minutes = input('How many minutes? \n')
+       self.start_timer()
 
-
-while int(x) < int(requested_units):
-	elapsed_time = (time.time()-start_time)
-	x = elapsed_time
-	print(x)
-
-
-# winsound.Beep(5000,1000)
-sound_machine = AudioPlayer("C:/Users/craym/Desktop/alarm.wav")
-sound_machine.play(block=True)
-
+my_timer = Egg_timer()
+my_timer.set_timer()
