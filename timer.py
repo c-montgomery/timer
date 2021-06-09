@@ -28,3 +28,5 @@ class Egg_timer:
        self.minutes = input('How many minutes? \n')
        self.start_timer()
 
+my_timer = Egg_timer()
+my_timer.set_timer()
