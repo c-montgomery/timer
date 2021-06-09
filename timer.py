@@ -1,6 +1,7 @@
 import time
-from audioplayer import AudioPlayer
+from pygame import mixer
 import keyboard
+import pygame
 
 class Egg_timer:
     '''It's an egg timer'''
@@ -17,10 +18,11 @@ class Egg_timer:
         self.play_alarm()
 
     def play_alarm(self):
-        sound_machine = AudioPlayer("C:/Users/craym/Desktop/alarm.wav")
+        mixer.init()
+        alarm_audio = mixer.music.load("C:/Users/craym/Desktop/alarm2.wav")
         while keyboard.is_pressed('space')==False:
-            sound_machine.play(loop=True, block=True)
-        sound_machine.stop()    
+            mixer.music.play(loops=-1)
+        mixer.music.stop()
 
     def set_timer(self):
        self.minutes = input('How many minutes? \n')
