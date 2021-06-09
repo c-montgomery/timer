@@ -2,6 +2,7 @@ import time
 from pygame import mixer
 import keyboard
 import pygame
+import time
 
 class Egg_timer:
     '''It's an egg timer'''
@@ -10,12 +11,15 @@ class Egg_timer:
         self.elapsed_seconds = 0
 
     '''Starts counting time, calls play_alarm function'''
-    def start_timer(self):
-        seconds_set = int(self.minutes)*60
+    def start_timer(self, minutes):
+        seconds_set = int(minutes)*60
         start_timer = time.time()
-        while int(self.elapsed_seconds) < int(seconds_set):
-            self.elapsed_seconds = round(time.time() - start_timer, 2)
-            print(round(self.elapsed_seconds, 2))
+        #Does line 18 need to be there?
+        elapsed_seconds = round(time.time() - start_timer, 2)
+        while int(elapsed_seconds) < int(seconds_set):
+            elapsed_seconds = round(time.time() - start_timer, 2)
+            time.sleep(.01)
+            print(round(elapsed_seconds, 2))
         self.play_alarm()
     '''initializes audio player, plays audio until space is pressed'''
     def play_alarm(self):
@@ -25,9 +29,5 @@ class Egg_timer:
             mixer.music.play(loops=-1)
         mixer.music.stop()
 
-    def set_timer(self):
-       self.minutes = input('How many minutes? \n')
-       self.start_timer()
+    
 
-my_timer = Egg_timer()
-my_timer.set_timer()
