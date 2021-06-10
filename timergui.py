@@ -25,15 +25,17 @@ class Window:
     instruction_label.pack()
     '''Wrapper function'''
     def wrapper(f, *args):
-
+        print('r')
         def inner(*_):
             f(*args)
+            print('ppppp')
+        inner()    
 
 
     '''creates 'quick' buttons and packs them'''
     
-    quick5 = tk.Button(root, text = '5 minutes', command=lambda : wrapper(create_timer,'timer1', 5))
-    quick15 = tk.Button(root, text = '15 minutes', command=lambda : wrapper(create_timer, 'timer2', 15))
+    quick5 = tk.Button(root, text = '5 minutes', command= wrapper(create_timer,'timer1', 1))
+    quick15 = tk.Button(root, text = '15 minutes', command= wrapper(create_timer, 'timer2', 15))
 
     quick5.pack()
     quick15.pack()
@@ -41,4 +43,3 @@ class Window:
 
     root.mainloop()
 
-win1 = Window()
