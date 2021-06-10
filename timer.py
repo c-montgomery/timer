@@ -25,9 +25,10 @@ class Egg_timer:
     def play_alarm(self):
         mixer.init()
         alarm_audio = mixer.music.load("C:/Users/craym/Desktop/alarm2.wav")
-        while keyboard.is_pressed('space')==False:
-            mixer.music.play(loops=-1)
-        mixer.music.stop()
+        mixer.music.play(loops=-1)
+        
+        #while keyboard.is_pressed('space')==True:
+        #   mixer.music.stop()
 
     
 

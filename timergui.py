@@ -1,45 +1,26 @@
 import tkinter as tk
 from tkinter.ttk import Combobox
 from timer import Egg_timer
+from pygame import mixer
 
-class Window:
-    '''Creates instance of egg timer gui'''
-    def __init__(self):
-        self.time = 1
-        
+class Window():
+    def __init__(self, arg):
+        self.arg = tk.Tk()
+        self.arg.title('Egg timer')
+        # self.button1 needs to change command to start_timer(5) after testing
+        self.button1 = tk.Button( self.arg, text = '5 minutos', command=lambda: self.start_timer('timer1', 1))
+        self.button1.pack()
+        self.arg.bind('<Key>', self.key_press)
+        self.arg.mainloop()
 
-    def create_timer(name, minutes ):
+    def start_timer(self, name, minutes):
         name = Egg_timer()
         name.start_timer(minutes)
+        
+    def key_press(self, event):
+        key = event.char
+        if key:
+            mixer.music.stop()
 
-    '''Variables for audio choice combobox'''
-    audio_tracks = ['soft', 'loud']
-
-    '''create window, set size and title'''
-    root = tk.Tk()
-    root.geometry('300x300')
-    root.title('Egg Timer')
-
-    '''create labels, buttons and combobox'''
-    instruction_label = tk.Label(root, text = 'Input an integer or choose a preset')
-    instruction_label.pack()
-    '''Wrapper function'''
-    def wrapper(f, *args):
-        print('r')
-        def inner(*_):
-            f(*args)
-            print('ppppp')
-        inner()    
-
-
-    '''creates 'quick' buttons and packs them'''
-    
-    quick5 = tk.Button(root, text = '5 minutes', command= wrapper(create_timer,'timer1', 1))
-    quick15 = tk.Button(root, text = '15 minutes', command= wrapper(create_timer, 'timer2', 15))
-
-    quick5.pack()
-    quick15.pack()
-    
-
-    root.mainloop()
-
+         
+win1 = Window('Ass')
