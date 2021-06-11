@@ -4,7 +4,7 @@ import keyboard
 import pygame
 import time
 
-class Egg_timer:
+class EggTimer:
     '''It's an egg timer'''
     def __init__(self):
         self.minutes = 1
