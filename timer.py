@@ -2,7 +2,7 @@ import time
 from pygame import mixer
 import keyboard
 import pygame
-import time
+
 
 class EggTimer:
     '''It's an egg timer'''
