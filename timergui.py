@@ -37,22 +37,27 @@ class Window():
     def start_timer(self, name, minutes):
         self.start_time = time.time()
         self.current_time = time.time()
-        self.minutes = minutes 
+        self.minutes_set = minutes 
         self.update_timer()
         
     '''Updates countdown display'''
-    '''Needs rework, starts playing sound immediately'''
-    def update_timer(self):
-        self.time_elapsed = time.time() - self.start_time
-        self.label.config(text = round(self.time_elapsed, 1))
-        self.name.after(100, self.update_timer)
-        while self.is_playing ==False:
-            if self.time_elapsed >= self.minutes_set * 60:
-                self.egg.play_alarm()
-                self.is_playing = True
-        
+    '''needs way to reset variables after timer stopped'''
+    def after_stop(self): 
+        while self.is_playing:
+            print('BROKE')
+            break
+        else:
+            self.update_timer()
 
+    def update_timer(self):
+        self.label.config(text = round(self.time_elapsed, 1))
     
+        self.name.after(100, self.after_stop)
+        #while self.is_playing ==False:
+        self.time_elapsed = time.time() - self.start_time
+        if self.time_elapsed >= self.minutes_set * 60:
+            self.egg.play_alarm()
+            self.is_playing = True
 
 
     '''listens for keypress and stops alarm'''    
