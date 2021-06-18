@@ -1,8 +1,6 @@
 import tkinter as tk
-from tkinter.ttk import Combobox
 from timer import EggTimer
 from pygame import mixer
-from tkinter import *
 import time
 
 
