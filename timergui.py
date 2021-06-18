@@ -18,6 +18,8 @@ class Window():
         self.current_time = 0
         self.time_elapsed = 0
         self.is_running = False
+        self.minutes_set = 0
+        self.is_playing = False
 
         self.label = tk.Label(self.name, text = self.time_elapsed)
         self.label.pack()
@@ -28,28 +30,36 @@ class Window():
         self.button1 = tk.Button( self.name, text = '15 minutos', command=lambda: self.start_timer('timer1', 15))
         self.button1.pack()
         
-
-        
-        
+        self.name.bind('<Key>', self.key_press)
         self.name.mainloop()
 
     '''creates EggTimer and starts counting'''
     def start_timer(self, name, minutes):
         self.start_time = time.time()
         self.current_time = time.time()
+        self.minutes = minutes 
         self.update_timer()
         
     '''Updates countdown display'''
+    '''Needs rework, starts playing sound immediately'''
     def update_timer(self):
         self.time_elapsed = time.time() - self.start_time
         self.label.config(text = round(self.time_elapsed, 1))
         self.name.after(100, self.update_timer)
+        while self.is_playing ==False:
+            if self.time_elapsed >= self.minutes_set * 60:
+                self.egg.play_alarm()
+                self.is_playing = True
+        
+
+    
+
 
     '''listens for keypress and stops alarm'''    
     def key_press(self, event):
         key = event.char
         if key:
             mixer.music.stop()
-# self.bind('<Key>', self.key_press)
+# 
 
 win = Window('Bilbo')
