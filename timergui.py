@@ -20,9 +20,9 @@ class Window():
 
         self.label = tk.Label(self.name, text=self.time_elapsed)
         self.label.pack()
-        # self.button1 needs to change command to start_timer(5) after testing
+      
         self.button1 = tk.Button(
-            self.name, text='5 minutos', command=lambda: self.start_timer('timer1', 1))
+            self.name, text='5 minutos', command=lambda: self.start_timer('timer1', 5))
         self.button1.pack()
 
         self.button1 = tk.Button(
@@ -54,7 +54,6 @@ class Window():
         self.label.config(text=round(self.time_elapsed, 1))
 
         self.name.after(100, self.after_stop)
-        # while self.is_playing ==False:
         self.time_elapsed = time.time() - self.start_time
         if self.time_elapsed >= self.minutes_set * 60:
             self.egg.play_alarm()
