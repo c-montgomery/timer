@@ -17,6 +17,7 @@ class Window():
         self.is_running = False
         self.minutes_set = 0
         self.is_playing = False
+        self.countdown = 0
 
         self.label = tk.Label(self.name, text=self.time_elapsed)
         self.label.pack()
@@ -51,10 +52,11 @@ class Window():
             self.update_timer()
 
     def update_timer(self):
-        self.label.config(text=round(self.time_elapsed, 1))
+        self.label.config(text=round(self.countdown, 1))
 
         self.name.after(100, self.after_stop)
         self.time_elapsed = time.time() - self.start_time
+        self.countdown = self.minutes_set * 60 - self.time_elapsed
         if self.time_elapsed >= self.minutes_set * 60:
             self.egg.play_alarm()
             self.is_playing = True
