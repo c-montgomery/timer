@@ -18,8 +18,9 @@ class Window():
         self.minutes_set = 0
         self.is_playing = False
         self.countdown = 0
+        self.converted_time = ''
 
-        self.label = tk.Label(self.name, text=self.time_elapsed)
+        self.label = tk.Label(self.name, text=self.time_elapsed, font=30)
         self.label.pack()
       
         self.button1 = tk.Button(
@@ -53,15 +54,20 @@ class Window():
     '''updates label to display countdown, 
     needs to be written to show seconds'''
     def update_timer(self):
-        self.label.config(text=round(self.countdown, 1))
-
+        self.converted_time = self.convert_seconds()
+        self.label.config(text=self.converted_time)
+        print('foo')
         self.name.after(100, self.after_stop)
         self.time_elapsed = time.time() - self.start_time
-        self.countdown = self.minutes_set * 60 - self.time_elapsed
         if self.time_elapsed >= self.minutes_set * 60:
             self.egg.play_alarm()
             self.is_playing = True
 
+    def convert_seconds(self):
+        
+        secs = time.gmtime(self.minutes_set * 60 - self.time_elapsed)
+        self.converted_time= time.strftime('%M:%S', secs)
+        return self.converted_time
     '''listens for keypress and stops alarm'''
 
     def key_press(self, event):
