@@ -50,7 +50,8 @@ class Window():
             break
         else:
             self.update_timer()
-
+    '''updates label to display countdown, 
+    needs to be written to show seconds'''
     def update_timer(self):
         self.label.config(text=round(self.countdown, 1))
 
