@@ -56,7 +56,7 @@ class Window():
     def update_timer(self):
         self.converted_time = self.convert_seconds()
         self.label.config(text=self.converted_time)
-        print('foo')
+        
         self.name.after(100, self.after_stop)
         self.time_elapsed = time.time() - self.start_time
         if self.time_elapsed >= self.minutes_set * 60:
